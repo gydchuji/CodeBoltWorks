@@ -1,15 +1,22 @@
-const binarySearch = (arr, target) => {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) {
-      return mid;
-    } else if (arr[mid] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-  return -1;
+function minStack() {
+  this.stack = [];
+  this.minStack = [];
+}
+minStack.prototype.push = function (x) {
+  this.stack.push(x);
+  if (
+    this.minStack.length === 0 ||
+    x <= this.minStack[this.minStack.length - 1]
+  )
+    this.minStack.push(x);
+};
+minStack.prototype.pop = function () {
+  if (this.stack.pop() === this.minStack[this.minStack.length - 1])
+    this.minStack.pop();
+};
+minStack.prototype.top = function () {
+  return this.stack[this.stack.length - 1];
+};
+minStack.prototype.getMin = function () {
+  return this.minStack[this.minStack.length - 1];
 };
