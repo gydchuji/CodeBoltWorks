@@ -1,12 +1,11 @@
-function longestCommonSubsequence(text1, text2) {
-  const m = text1.length;
-  const n = text2.length;
-  const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      if (text1[i - 1] === text2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
-      else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-    }
+function isValidBST(root) {
+  return isValid(root, null, null);
+  function isValid(node, min, max) {
+    if (!node) return true;
+    if ((min !== null && node.val <= min) || (max !== null && node.val >= max))
+      return false;
+    return (
+      isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
+    );
   }
-  return dp[m][n];
 }
