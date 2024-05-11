@@ -1,34 +1,13 @@
-function minWindowSubstring(s, t) {
-  const map = new Map();
-  for (const char of t) {
-    map.set(char, (map.get(char) || 0) + 1);
+function searchMatrix(matrix, target) {
+  if (matrix.length === 0 || matrix[0].length === 0) return false;
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let row = 0;
+  let col = cols - 1;
+  while (row < rows && col >= 0) {
+    if (matrix[row][col] === target) return true;
+    else if (matrix[row][col] < target) row++;
+    else col--;
   }
-  let required = map.size;
-  let left = 0;
-  let right = 0;
-  let minLen = Infinity;
-  let substrStart = 0;
-  while (right < s.length) {
-    const char = s[right];
-    if (map.has(char)) {
-      map.set(char, map.get(char) - 1);
-      if (map.get(char) === 0) required--;
-    }
-    while (required === 0) {
-      if (right - left + 1 < minLen) {
-        minLen = right - left + 1;
-        substrStart = left;
-      }
-      const leftChar = s[left];
-      if (map.has(leftChar)) {
-        map.set(leftChar, map.get(leftChar) + 1);
-        if (map.get(leftChar) > 0) required++;
-      }
-      left++;
-    }
-    right++;
-  }
-  return minLen === Infinity
-    ? ""
-    : s.substring(substrStart, substrStart + minLen);
+  return false;
 }
