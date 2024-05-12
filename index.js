@@ -1,13 +1,12 @@
-function searchMatrix(matrix, target) {
-  if (matrix.length === 0 || matrix[0].length === 0) return false;
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-  let row = 0;
-  let col = cols - 1;
-  while (row < rows && col >= 0) {
-    if (matrix[row][col] === target) return true;
-    else if (matrix[row][col] < target) row++;
-    else col--;
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let key = arr[i];
+    let j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = key;
   }
-  return false;
+  return arr;
 }
