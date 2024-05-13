@@ -1,12 +1,22 @@
-function insertionSort(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    let key = arr[i];
-    let j = i - 1;
-    while (j >= 0 && arr[j] > key) {
-      arr[j + 1] = arr[j];
-      j--;
-    }
-    arr[j + 1] = key;
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there are elements remaining
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // Swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
-  return arr;
+
+  return array;
 }
+
+const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
+console.log(shuffledDeck);
